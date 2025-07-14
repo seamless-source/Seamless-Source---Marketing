@@ -1,0 +1,38 @@
+name: SmartLead Daily Automation
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 06:00 UTC (adjust as needed)
+  workflow_dispatch:     # Allow manual trigger
+
+jobs:
+  run-scheduler:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Automation  # 👈 Run everything from this folder
+
+    env:
+      SMARTLEAD_API_KEY: ${{ secrets.SMARTLEAD_API_KEY }}
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+      NOTIFY_EMAIL_SANDUN: ${{ secrets.NOTIFY_EMAIL_SANDUN }}
+      NOTIFY_EMAIL_PRIYA: ${{ secrets.NOTIFY_EMAIL_PRIYA }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Automation
+        run: python automation.py
