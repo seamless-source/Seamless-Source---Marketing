@@ -1,0 +1,54 @@
+name: SmartLead Daily Automation
+
+on:
+  schedule:
+    # NOTE: All cron times are in UTC.
+    # This runs at 7:00 AM UTC on weekdays (Mon-Fri).
+    # This corresponds to:
+    # - 7:00 AM in London during winter (GMT)
+    # - 8:00 AM in London during summer (BST)
+    - cron: '0 7 * * 1-5'
+  
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  run-scheduler:
+    runs-on: ubuntu-latest
+
+    # FIXED: Define working-directory only once.
+    # All 'run' steps will execute from this directory.
+    defaults:
+      run:
+        working-directory: ./Automation
+
+    env:
+      SMARTLEAD_API_KEY: ${{ secrets.SMARTLEAD_API_KEY }}
+
+    steps:
+      - name: Checkout repo
+        # BEST PRACTICE: Use the latest version of the action
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # BEST PRACTICE: Add caching for pip dependencies
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip # The path to cache
+          # Create a new cache if requirements.txt changes
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          # The working-directory default applies here
+          pip install -r requirements.txt
+
+      - name: Run Automation Script
+        run: python automation.py
