@@ -13,8 +13,9 @@ jobs:
 
     defaults:
       run:
-        # CORRECTED: Full path from the repository root, enclosed in quotes.
-        working-directory: "Seamless-Source---Marketing/SmartLead Daily Automation/Automation"
+        # CORRECTED: This is the path INSIDE your repository.
+        # It is relative to the checkout root.
+        working-directory: ./SmartLead Daily Automation/Automation
 
     env:
       SMARTLEAD_API_KEY: ${{ secrets.SMARTLEAD_API_KEY }}
@@ -32,13 +33,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          # CORRECTED: The hashFiles path must also be the full path.
+          # CORRECTED: The hashFiles path must also be the path from the repo root.
           key: ${{ runner.os }}-pip-${{ hashFiles('Seamless-Source---Marketing/SmartLead Daily Automation/Automation/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        # This now runs correctly inside the 'Automation' folder.
+        # This will now correctly run inside the 'Automation' folder.
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
