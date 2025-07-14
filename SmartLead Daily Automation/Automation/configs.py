@@ -33,7 +33,7 @@ campaign_schedules = {
         },
         1: {  # emails max 18
             "timezone": "Europe/London",
-            "start_hour": "12:41",
+            "start_hour": "11:41",
             "end_hour": "16:43",
             "min_time_btw_emails": 13,
             "max_new_leads_per_day": 20,
@@ -76,7 +76,7 @@ campaign_schedules = {
         },
         1: {  # emails max 15
             "timezone": "Europe/London",
-            "start_hour": "07:56",
+            "start_hour": "07:50",
             "end_hour": "13:21",
             "min_time_btw_emails": 15,
             "max_new_leads_per_day": 20,
@@ -113,7 +113,7 @@ campaign_schedules = {
             "min_time_btw_emails": 15, "max_new_leads_per_day": 25, "days_of_the_week": [1, 2, 3, 4, 5]
         },
         1: {
-            "timezone": "Europe/London", "start_hour": "10:10", "end_hour": "15:00",
+            "timezone": "Europe/London", "start_hour": "10:15", "end_hour": "15:00",
             "min_time_btw_emails": 14, "max_new_leads_per_day": 22, "days_of_the_week": [1, 2, 3, 4, 5]
         },
         2: {
@@ -135,7 +135,7 @@ campaign_schedules = {
             "min_time_btw_emails": 12, "max_new_leads_per_day": 30, "days_of_the_week": [1, 2, 3, 4, 5]
         },
         1: {
-            "timezone": "Europe/London", "start_hour": "11:00", "end_hour": "15:30",
+            "timezone": "Europe/London", "start_hour": "11:10", "end_hour": "15:30",
             "min_time_btw_emails": 15, "max_new_leads_per_day": 25, "days_of_the_week": [1, 2, 3, 4, 5]
         },
         2: {
