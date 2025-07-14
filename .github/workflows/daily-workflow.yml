@@ -19,8 +19,7 @@ jobs:
     # All 'run' steps will execute from this directory.
     defaults:
       run:
-        working-directory: ./Automation
-
+        working-directory: "SmartLead Daily Automatio/Automation"
     env:
       SMARTLEAD_API_KEY: ${{ secrets.SMARTLEAD_API_KEY }}
 
@@ -40,7 +39,7 @@ jobs:
         with:
           path: ~/.cache/pip # The path to cache
           # Create a new cache if requirements.txt changes
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('SmartLead Daily Automatio/Automation/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
